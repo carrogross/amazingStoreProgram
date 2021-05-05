@@ -1,7 +1,7 @@
 package se.kth.iv1350.processSale.integration;
 
 /**
- *
+ * Contains all communication with the printer.
  */
 public class Printer {
     ReceiptDTO receiptDTO;
@@ -11,7 +11,8 @@ public class Printer {
     }
 
     /**
-     * -------------------------
+     * Prints a receipt containing information about the current sale, incl information about the store and time of sale.
+     * @param receiptDTO The object containing all information about the current sale.
      */
     public void printReceipt(ReceiptDTO receiptDTO){
         this.receiptDTO = receiptDTO;

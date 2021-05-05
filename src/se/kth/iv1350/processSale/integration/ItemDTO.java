@@ -1,5 +1,8 @@
 package se.kth.iv1350.processSale.integration;
 
+/**
+ * Represents on <code>ItemDTO</code>.
+ */
 public class ItemDTO {
     private double itemPrice;
     private String itemName;
@@ -7,14 +10,6 @@ public class ItemDTO {
     private String itemDescription;
     private double itemVatRate;
 
-    /**
-     * PAKETPRIVAT
-     * @param price
-     * @param identifier
-     * @param name
-     * @param vatRate
-     * @param description
-     */
     ItemDTO (double price, int identifier, String name, int vatRate, String description){
         this.itemPrice = price;
         this.itemName = name;
@@ -25,40 +20,40 @@ public class ItemDTO {
     }
 
     /**
-     * ----------------------
-     * @return
+     * Gets the price for the item.
+     * @return A double representing the price for the item.
      */
     public double getItemPrice() {
         return itemPrice;
     }
 
     /**
-     * ----------------------
-     * @return
+     * Gets the name of the item.
+     * @return A String representing the name of the item.
      */
     public String getItemName() {
         return itemName;
     }
 
     /**
-     * ----------------------
-     * @return
+     * Gets the identifier of the item.
+     * @return An int representing the identifier of the item.
      */
     public int getItemIdentifier() {
         return itemIdentifier;
     }
 
     /**
-     * ----------------------
-     * @return
+     * Gets the description of the item.
+     * @return A String representing the description of the item.
      */
     public String getItemDescription() {
         return itemDescription;
     }
 
     /**
-     * ---------------------
-     * @return
+     * Gets the VAT-rate for the item.
+     * @return A double representing the VAT-rate for the item.
      */
     public double getItemVatRate() {
         return itemVatRate;

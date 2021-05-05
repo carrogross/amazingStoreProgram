@@ -11,7 +11,7 @@ public class View {
     private Controller controller;
 
     /**
-     * --------------------------
+     * Creates the view and starts a new Controller and assigns it to the controller field.
      */
     public View(){
         this.controller = new Controller();
@@ -32,42 +32,33 @@ public class View {
     public void runExampleSession(int quantity1, int itemIdentifier1, int quantity2, int itemIdentifier2, int quantity3, int itemIdentifier3, long customerPersonalNumber, double amountPaid) {
 
         initializeNewSale();
-
-        Sale saleDetails = controller.scanItem(quantity1, itemIdentifier1);
-        ItemDTO latestScannedItem = saleDetails.getItemListInSale().get(saleDetails.getItemListInSale().size() - 1);
-        System.out.println("Latest scanned item: " + latestScannedItem.getItemName() + ", " + latestScannedItem.getItemDescription() + ", Price: "
-                + latestScannedItem.getItemPrice() + " SEK" + ", Quantity: " + quantity1 + ", Total price: "
-                + latestScannedItem.getItemPrice() * quantity1 + " SEK \nRunning total: " + saleDetails.getTotalPriceInclVat() + "SEK \n");
-
-        controller.scanItem(quantity2, itemIdentifier2);
-        latestScannedItem = saleDetails.getItemListInSale().get(saleDetails.getItemListInSale().size() - 1);
-        System.out.println("Latest scanned item: " + latestScannedItem.getItemName() + ", " + latestScannedItem.getItemDescription() + ", Price: "
-                + latestScannedItem.getItemPrice() + " SEK" + ", Quantity: " + quantity2 + ", Total price: "
-                + latestScannedItem.getItemPrice() * quantity2 + " SEK \nRunning total: " + saleDetails.getTotalPriceInclVat() + "SEK \n");
-
-        controller.scanItem(quantity3, itemIdentifier3);
-        latestScannedItem = saleDetails.getItemListInSale().get(saleDetails.getItemListInSale().size() - 1);
-        System.out.println("Latest scanned item: " + latestScannedItem.getItemName() + ", " + latestScannedItem.getItemDescription() + ", Price: "
-                + latestScannedItem.getItemPrice() + " SEK" + ", Quantity: " + quantity3 + ", Total price: "
-                + latestScannedItem.getItemPrice() * quantity3 + " SEK \nRunning total: " + saleDetails.getTotalPriceInclVat() + " SEK \n");
-
+        scanItem(quantity1, itemIdentifier1);
+        scanItem(quantity2, itemIdentifier2);
+        Sale saleDetails = scanItem(quantity3, itemIdentifier3);
         endSale(saleDetails);
-
-        requestDiscount(customerPersonalNumber);
-
+        //requestDiscount(customerPersonalNumber);
         calculateChange(amountPaid);
 
     }
 
+    private Sale scanItem(int quantity1, int itemIdentifier1) {
+        Sale saleDetails = controller.scanItem(quantity1, itemIdentifier1);
+        ItemDTO latestScannedItem = saleDetails.getItemListInSale().get(saleDetails.getItemListInSale().size() - 1);
+        System.out.println("Latest scanned item: " + latestScannedItem.getItemName() + " - " + latestScannedItem.getItemDescription() + ", Price: "
+                + latestScannedItem.getItemPrice() + " SEK" + ", Quantity: " + quantity1 + ", Total price: "
+                + latestScannedItem.getItemPrice() * quantity1 + " SEK \nRunning total: " + saleDetails.getTotalPriceInclVat() + "SEK \n");
+        return saleDetails;
+    }
+
     private void calculateChange(double amountPaid) {
         double amountChange = controller.calculateChange(amountPaid);
-        System.out.println("Amount paid: " + amountPaid + " SEK\n");
+        System.out.println("Amount paid: " + amountPaid + " SEK");
         System.out.println("Amount of change to give back to customer: " + amountChange + " SEK \n");
     }
 
     private void requestDiscount(long customerPersonalNumber) {
         controller.requestDiscount(customerPersonalNumber);
-        //System.out.println("Total price after discount: " + saleDetails.getTotalPriceInclVat() + " SEK \n");
+        System.out.println("Total price after discount: ");
     }
 
     private void endSale(Sale saleDetails) {
@@ -79,6 +70,4 @@ public class View {
         controller.initializeSale();
         System.out.println("A new sale har been initialized. \n");
     }
-
-
 }

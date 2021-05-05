@@ -3,7 +3,8 @@ package se.kth.iv1350.processSale.integration;
 import java.util.ArrayList;
 
 /**
- *
+ * Class containing all communication with External Inventory System. In this version also contains a
+ * hard coded item registry with some <code>ItemDTO</code>s to make it possible to run the program.
  */
 public class InventorySystem {
     ItemDTO itemDTO;
@@ -21,16 +22,18 @@ public class InventorySystem {
     }
 
     /**
-     * Updates external inventory system.
-     * @param receiptDTO Object containing all available information about current sale.
+     * Would contain a method for updating the Inventory System with information from <code>ReceiptDTO</code>,
+     * for this exercise: does nothing.
+     * @param receiptDTO The object containing all information about the current sale.
      */
     public void updateInventorySystem(ReceiptDTO receiptDTO){
 
     }
 
     /**
-     * -------------------
-     * ofullständig
+     * Collects all information about the item represented by <code>itemIdentifier</code> and puts these together in an <code>ItemDTO</code>.
+     * @param itemIdentifier The 6 figured number code on the items bar code.
+     * @return The <code>ItemDTO</code> containing all information in the item registry about the item with the specified <code>itemIdentifier</code>.
      */
     public ItemDTO getItemDetails(int itemIdentifier) {
         return findItem(itemIdentifier);

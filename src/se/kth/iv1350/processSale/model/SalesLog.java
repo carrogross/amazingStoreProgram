@@ -8,7 +8,8 @@ import se.kth.iv1350.processSale.integration.SystemStartup;
 import java.util.ArrayList;
 
 /**
- * Logs all information about each performed sales in an array as <code>ReceiptDTO</code>.
+ * Represents the sales log that logs all <code>ReceiptDTO</code>s after completed sale and
+ * sends information to inventory system and accounting system.
  */
 public class SalesLog {
     ArrayList<ReceiptDTO> salesLog;
@@ -25,7 +26,8 @@ public class SalesLog {
     }
 
     /**
-     * Sends all information about the sale to inventory system and accounting system.
+     * Logs all information about each performed sales in an array as <code>ReceiptDTO</code> and
+     * sends all information about the sale to inventory system and accounting system.
      * @param receiptDTO The object that is added to the sales log.
      */
     public void logSale(ReceiptDTO receiptDTO){
@@ -34,6 +36,10 @@ public class SalesLog {
         accountingSystem.updateAccountingSystem(receiptDTO);
     }
 
+    /**
+     * Gets the array representing the sales log containing all <code>ReceiptDTO</code>s.
+     * @return The array representing the sales log containing all <code>ReceiptDTO</code>s.
+     */
     public ArrayList<ReceiptDTO> getSalesLog(){
         return salesLog;
     }

@@ -9,7 +9,7 @@ public class Main {
 
     /**
      * Main method to start the program execution.
-     * @param args
+     * @param args Array of command line arguments .
      */
     public static void main(String[] args) {
         View view = new View();

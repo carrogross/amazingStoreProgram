@@ -61,7 +61,6 @@ public class Sale {
         return itemQuantityListInSale;
     }
 
-
     /**
      * Returns the total price of the entered items in the current sale.
      * @return The total price of the entered items in the current sale.

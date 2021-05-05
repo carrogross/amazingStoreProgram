@@ -5,7 +5,7 @@ import se.kth.iv1350.processSale.model.Sale;
 import java.time.LocalDateTime;
 
 /**
- * Contains all information about each sale. Immutable for safe transport between layers.
+ * Representa a <code>ReceiptDTO</code> containing all information about the sale, the store and the time of the sale.
  */
 public class ReceiptDTO {
     static final String storeStreetName = "Amazing Av.";

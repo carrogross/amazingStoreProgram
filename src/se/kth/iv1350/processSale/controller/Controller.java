@@ -6,7 +6,8 @@ import se.kth.iv1350.processSale.model.Sale;
 import se.kth.iv1350.processSale.model.SalesLog;
 
 /**
- *
+ * The class containing the programs only Controller. All calls from view must go
+ * through Controller which distributes to the right class and method.
  */
 public class Controller {
     SalesLog salesLog;

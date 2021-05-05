@@ -1,22 +1,14 @@
 package se.kth.iv1350.processSale.model;
 
 /**
- * -------------------
+ * Contains information and calculations about discounts.
  */
 public class DiscountRules {
 
     /**
-     * --------------------
-     * ska vara public DiscountRules bootDiscountRules och returnera discountRules
-     */
-    public DiscountRules(){
-
-    }
-
-    /**
-     *
-     * @param customerPersonalNumber
-     * @param saleDetails
+     * Not a part of seminar 3.
+     * @param customerPersonalNumber A long representing the customer's personal number.
+     * @param saleDetails The object containing all information about the sale and it's items.
      * @return
      */
     public double calculateDiscount(long customerPersonalNumber, Sale saleDetails){
