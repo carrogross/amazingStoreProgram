@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import se.kth.iv1350.processSale.controller.Controller;
 import se.kth.iv1350.processSale.integration.InventorySystem;
 import se.kth.iv1350.processSale.integration.ItemDTO;
-import se.kth.iv1350.processSale.integration.Register;
 import se.kth.iv1350.processSale.integration.SystemStartup;
 
 import static org.junit.jupiter.api.Assertions.*;

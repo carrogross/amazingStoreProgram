@@ -1,16 +1,10 @@
 package se.kth.iv1350.processSale.controller;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
-import se.kth.iv1350.processSale.integration.ItemDTO;
-import se.kth.iv1350.processSale.integration.ReceiptDTO;
+import org.junit.jupiter.api.*;
 import se.kth.iv1350.processSale.integration.Register;
 import se.kth.iv1350.processSale.integration.SystemStartup;
 import se.kth.iv1350.processSale.model.Sale;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 class ControllerTest {
     private Controller controller;
@@ -29,13 +23,13 @@ class ControllerTest {
 
     @Test
     void testCreateController(){
-        assertTrue(controller instanceof Controller, "A new Controller object is not created. ");
+        Assertions.assertTrue(controller instanceof Controller, "A new Controller object is not created. ");
     }
 
     @Test
     void testInitializeSaleCreatesNewSale() {
         controller.initializeSale();
-        assertTrue(controller.saleDetails instanceof Sale, "A new Sale object is not created. ");
+        Assertions.assertTrue(controller.saleDetails instanceof Sale, "A new Sale object is not created. ");
     }
 
     @Test
@@ -46,7 +40,7 @@ class ControllerTest {
 
         saleDetails = controller.scanItem(quantity, itemIdentifier);
         int expectedQuantity = 1;
-        assertEquals(expectedQuantity, saleDetails.getItemListInSale().size(), "Item is not added to Sale object. ");
+        Assertions.assertEquals(expectedQuantity, saleDetails.getItemListInSale().size(), "Item is not added to Sale object. ");
     }
 
     @Test
@@ -57,7 +51,7 @@ class ControllerTest {
 
         saleDetails = controller.scanItem(quantity, itemIdentifier);
         int expectedQuantity = 1;
-        assertEquals(expectedQuantity, saleDetails.getItemListInSale().size(), "Zero quantity not registered as 1. ");
+        Assertions.assertEquals(expectedQuantity, saleDetails.getItemListInSale().size(), "Zero quantity not registered as 1. ");
 
     }
 
@@ -69,7 +63,7 @@ class ControllerTest {
 
         saleDetails = controller.scanItem(quantity, itemIdentifier);
         int expectedQuantity = quantity;
-        assertEquals(expectedQuantity, saleDetails.getTotalItemQuantityInSale(), "Item quantity is not added to Sale object. ");
+        Assertions.assertEquals(expectedQuantity, saleDetails.getTotalItemQuantityInSale(), "Item quantity is not added to Sale object. ");
     }
 
     @Test
@@ -81,7 +75,7 @@ class ControllerTest {
         saleDetails = controller.scanItem(quantity, itemIdentifier);
         String expectedItemName = "Gurka";
 
-        assertEquals(expectedItemName, saleDetails.getItemListInSale().get(saleDetails.getItemListInSale().size() - 1).getItemName(), "ItemDTO is not correctly added to Sale object. ");
+        Assertions.assertEquals(expectedItemName, saleDetails.getItemListInSale().get(saleDetails.getItemListInSale().size() - 1).getItemName(), "ItemDTO is not correctly added to Sale object. ");
     }
 
     @Test
@@ -93,10 +87,10 @@ class ControllerTest {
         saleDetails.setTotalVatPrice(testAmountVatPrice);
 
         double testAmountTotalPriceInclVat = testAmountTotalPrice + testAmountVatPrice;
-        assertEquals(saleDetails.getTotalPriceInclVat(), testAmountTotalPriceInclVat, "Total price incl VAT is not calculated correctly. ");
+        Assertions.assertEquals(saleDetails.getTotalPriceInclVat(), testAmountTotalPriceInclVat, "Total price incl VAT is not calculated correctly. ");
     }
 
-    @Disabled
+    @Test
     void testCalculateChangeTooLowAmountPaidEntered(){
 
     }
@@ -108,7 +102,7 @@ class ControllerTest {
         controller.calculateChange(amountPaid);
         int expectedLoggedSales = 1;
         int amountLoggedSales = controller.salesLog.getSalesLog().size();
-        assertEquals(expectedLoggedSales, amountLoggedSales, "The sale is not logged correctly. ");
+        Assertions.assertEquals(expectedLoggedSales, amountLoggedSales, "The sale is not logged correctly. ");
 
     }
 
@@ -124,7 +118,7 @@ class ControllerTest {
         saleDetails.setTotalVatPrice(totalVatPrice);
         double testAmountChange = register.updateAmountInRegister(testAmountPaid, saleDetails);
         double expectedChange = testAmountPaid - (totalPriceForSale + totalVatPrice);
-        assertEquals(expectedChange, testAmountChange, "Change is not calculated correctly. ");
+        Assertions.assertEquals(expectedChange, testAmountChange, "Change is not calculated correctly. ");
     }
 
     @Test
@@ -141,10 +135,10 @@ class ControllerTest {
         double amountPaid = 100;
         double calculatedChange = controller.calculateChange(amountPaid);
         double expectedChange = amountPaid - (totalPriceForSale + totalVatPrice);
-        assertEquals(expectedChange, calculatedChange, "Change is not returned correctly. ");
+        Assertions.assertEquals(expectedChange, calculatedChange, "Change is not returned correctly. ");
     }
 
-    @Disabled
+    @Test
     void requestDiscount() {
     }
 }
