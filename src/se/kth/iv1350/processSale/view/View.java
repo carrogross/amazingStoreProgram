@@ -41,12 +41,17 @@ public class View {
 
     }
 
+    private void initializeNewSale() {
+        controller.initializeSale();
+        System.out.println("A new sale har been initialized. \n");
+    }
+
     private Sale scanItem(int quantity1, int itemIdentifier1) {
         Sale saleDetails = controller.scanItem(quantity1, itemIdentifier1);
         ItemDTO latestScannedItem = saleDetails.getItemListInSale().get(saleDetails.getItemListInSale().size() - 1);
         System.out.println("Latest scanned item: " + latestScannedItem.getItemName() + " - " + latestScannedItem.getItemDescription() + ", Price: "
                 + latestScannedItem.getItemPrice() + " SEK" + ", Quantity: " + quantity1 + ", Total price: "
-                + latestScannedItem.getItemPrice() * quantity1 + " SEK \nRunning total: " + saleDetails.getTotalPriceInclVat() + "SEK \n");
+                + latestScannedItem.getItemPrice() * quantity1 + " SEK \nRunning total incl VAT: " + saleDetails.getTotalPriceInclVat() + " SEK \n");
         return saleDetails;
     }
 
@@ -64,10 +69,5 @@ public class View {
     private void endSale(Sale saleDetails) {
         controller.endSale();
         System.out.println("Total price: " + saleDetails.getTotalPriceInclVat() + " SEK \n");
-    }
-
-    private void initializeNewSale() {
-        controller.initializeSale();
-        System.out.println("A new sale har been initialized. \n");
     }
 }
