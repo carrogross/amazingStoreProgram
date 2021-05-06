@@ -25,7 +25,7 @@ class RegisterTest {
 
     @Test
     void testCreateRegister(){
-        assertTrue(register instanceof Register, "Register is not created correctly.");
+        assertNotNull(register, "Register is not created correctly.");
     }
 
     @Test

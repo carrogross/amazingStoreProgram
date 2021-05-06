@@ -35,7 +35,7 @@ class SaleTest {
 
     @Test
     void testCreateSale() {
-        assertTrue(saleDetails instanceof Sale, "Sale object is not created correctly.");
+        assertNotNull(saleDetails, "Sale object is not created correctly.");
     }
 
     @Test
