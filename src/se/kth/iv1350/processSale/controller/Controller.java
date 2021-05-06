@@ -17,6 +17,7 @@ public class Controller {
     InventorySystem inventorySystem;
     Register register;
     Printer printer;
+    ItemDTO latestScannedItemDTO;
 
     /**
      * The only Controller in the program. All calls from view must go
@@ -49,8 +50,8 @@ public class Controller {
         if(quantity == 0)
             quantity = 1;
 
-        ItemDTO itemDTO = inventorySystem.getItemDetails(itemIdentifier);
-        saleDetails.addItem(itemDTO, quantity);
+        latestScannedItemDTO = inventorySystem.getItemDetails(itemIdentifier);
+        saleDetails.addItem(latestScannedItemDTO, quantity);
         return saleDetails;
     }
 
@@ -71,7 +72,6 @@ public class Controller {
         double amountChange = register.updateAmountInRegister(amountPaid, saleDetails);
 
         ReceiptDTO receiptDTO = new ReceiptDTO(saleDetails, amountPaid, amountChange);
-
         printer.printReceipt(receiptDTO);
         salesLog.logSale(receiptDTO);
 
@@ -85,5 +85,13 @@ public class Controller {
      */
     public double requestDiscount(long customerPersonalNumber) {
         return discountRules.calculateDiscount(customerPersonalNumber, saleDetails);
+    }
+
+    /**
+     * Gets the <code>ItemDTO</code> that represents the latest scanned item.
+     * @return The <code>ItemDTO</code> that represents the latest scanned item.
+     */
+    public ItemDTO getLatestScannedItemDTO() {
+        return latestScannedItemDTO;
     }
 }

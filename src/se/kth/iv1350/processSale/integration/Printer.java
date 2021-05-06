@@ -23,7 +23,7 @@ public class Printer {
         int storePostalCode = receiptDTO.getStorePostalCode();
         String storeCityName = receiptDTO.getStoreCityName();
 
-        System.out.println("------------------------------------------");
+        System.out.println("----------------------------------------------------");
         System.out.println("RECEIPT: ");
         System.out.println(receiptDTO.getTimeAndDate() + "\n");
         System.out.println(storeName);
@@ -44,9 +44,9 @@ public class Printer {
         System.out.println("Total VAT-price: " + receiptDTO.getSaleDetails().getTotalVatPrice() + " SEK");
         System.out.println("TOTAL PRICE INCL VAT: " + receiptDTO.getSaleDetails().getTotalPriceInclVat() + " SEK\n");
 
-        System.out.println("Amount paid: " + receiptDTO.getAmountPaid());
-        System.out.println("Amount change: " + receiptDTO.getAmountChange() + "\n");
-        System.out.println("Thank you for shopping at Amazing Store! \nWelcome back!");
-        System.out.println("------------------------------------------\n");
+        System.out.println("Amount paid: " + receiptDTO.getAmountPaid() + " SEK");
+        System.out.println("Amount change: " + receiptDTO.getAmountChange() + " SEK\n");
+        System.out.println("Thank you for shopping at Amazing Store! \nWelcome back soon!");
+        System.out.println("----------------------------------------------------\n");
     }
 }

@@ -20,25 +20,16 @@ public class View {
     /**
      * Performs a fake sale session to demonstrate the program by calling all system operations in
      * the controller.
-     * @param quantity1 Quantity of the first item in the sale.
-     * @param itemIdentifier1 Identifier of the first item in the sale.
-     * @param quantity2 Quantity of the second item in the sale.
-     * @param itemIdentifier2 Identifier of the second item in the sale.
-     * @param quantity3 Quantity of the third item in the sale.
-     * @param itemIdentifier3 Identifier of the third item in the sale.
-     * @param customerPersonalNumber A personal number used to request discount on current sale.
-     * @param amountPaid Total value of cash that is used to pay for the sale.
      */
-    public void runExampleSession(int quantity1, int itemIdentifier1, int quantity2, int itemIdentifier2, int quantity3, int itemIdentifier3, long customerPersonalNumber, double amountPaid) {
+    public void runExampleSession() {
 
         initializeNewSale();
-        scanItem(quantity1, itemIdentifier1);
-        scanItem(quantity2, itemIdentifier2);
-        Sale saleDetails = scanItem(quantity3, itemIdentifier3);
+        scanItem(1, 123456);
+        scanItem(2, 456789);
+        Sale saleDetails = scanItem(3, 123456);
         endSale(saleDetails);
         //requestDiscount(customerPersonalNumber);
-        calculateChange(amountPaid);
-
+        calculateChange(100);
     }
 
     private void initializeNewSale() {
@@ -48,7 +39,7 @@ public class View {
 
     private Sale scanItem(int quantity1, int itemIdentifier1) {
         Sale saleDetails = controller.scanItem(quantity1, itemIdentifier1);
-        ItemDTO latestScannedItem = saleDetails.getItemListInSale().get(saleDetails.getItemListInSale().size() - 1);
+        ItemDTO latestScannedItem = controller.getLatestScannedItemDTO();
         System.out.println("Latest scanned item: " + latestScannedItem.getItemName() + " - " + latestScannedItem.getItemDescription() + ", Price: "
                 + latestScannedItem.getItemPrice() + " SEK" + ", Quantity: " + quantity1 + ", Total price: "
                 + latestScannedItem.getItemPrice() * quantity1 + " SEK \nRunning total incl VAT: " + saleDetails.getTotalPriceInclVat() + " SEK \n");

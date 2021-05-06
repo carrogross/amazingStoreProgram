@@ -79,7 +79,7 @@ class ControllerTest {
     }
 
     @Test
-    void TestEndSaleCalculatesTotalPriceInclVat() {
+    void testEndSaleCalculatesTotalPriceInclVat() {
         Sale saleDetails = new Sale();
         double testAmountTotalPrice = 10;
         double testAmountVatPrice = 3;

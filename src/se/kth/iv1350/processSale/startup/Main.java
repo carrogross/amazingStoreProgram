@@ -13,8 +13,7 @@ public class Main {
      */
     public static void main(String[] args) {
         View view = new View();
-        view.runExampleSession(1, 123456, 2, 234567,
-                3, 345678, 920413, 100);
+        view.runExampleSession();
 
     }
 }

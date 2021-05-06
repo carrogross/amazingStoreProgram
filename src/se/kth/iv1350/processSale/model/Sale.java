@@ -26,15 +26,44 @@ public class Sale {
 
     /**
      * Adds an <code>ItemDTO</code> to the current sale, according to entered quantity.
+     * If the item har already been scanned before, only the quantity for that item will be increased.
      * @param itemDTO The object containing all information about the item that should be entered to the current sale.
      * @param quantity The amount of the item in <code>ItemDTO</code> that should be added to the current sale.
      */
     public void addItem(ItemDTO itemDTO,int quantity){
-        this.itemListInSale.add(itemDTO);
-        this.itemQuantityListInSale.add(quantity);
+
+        if(!itemAlreadyScanned(itemDTO)){
+            this.itemListInSale.add(itemDTO);
+            this.itemQuantityListInSale.add(quantity);
+        }
+        else{
+            updateAlreadyScannedItemQuantity(itemDTO, quantity);
+        }
+
         this.totalPriceForSale += itemDTO.getItemPrice() * quantity;
         this.totalVatPrice += getItemVatPrice(itemDTO) * quantity;
         this.totalItemQuantityInSale += quantity;
+    }
+
+    private boolean itemAlreadyScanned(ItemDTO itemDTO){
+        return itemListInSale.contains(itemDTO);
+    }
+
+    private void updateAlreadyScannedItemQuantity(ItemDTO itemDTO, int quantity){
+        for (int index = 0; index < itemListInSale.size(); index++){
+            if(itemFound(itemDTO, index)){
+                updateQuantityList(quantity, index);
+            }
+        }
+    }
+
+    private void updateQuantityList(int quantity, int i) {
+        int newQuantity = (itemQuantityListInSale.get(i) + quantity);
+        itemQuantityListInSale.set(i, newQuantity);
+    }
+
+    private boolean itemFound(ItemDTO itemDTO, int i) {
+        return itemListInSale.get(i).getItemIdentifier() == itemDTO.getItemIdentifier();
     }
 
     private double getItemVatPrice(ItemDTO itemDTO) {

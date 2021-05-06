@@ -61,6 +61,63 @@ class SaleTest {
     }
 
     @Test
+    void testAddItemAlreadyScanned(){
+        int quantity1 = 3;
+        int itemIdentifier = 123456;
+
+        ItemDTO itemDTO = inventorySystem.getItemDetails(itemIdentifier);
+        saleDetails.addItem(itemDTO, quantity1);
+
+        int quantity2 = 2;
+
+        itemDTO = inventorySystem.getItemDetails(itemIdentifier);
+        saleDetails.addItem(itemDTO, quantity2);
+
+        int expectedQuantityOfDifferentItemsInSale = 1;
+
+        assertEquals(expectedQuantityOfDifferentItemsInSale, saleDetails.getItemListInSale().size(), "Item is faultly added to Sale object. ");
+
+    }
+
+    @Test
+    void testAddItemQuantityToTotalQuantityAlreadyScanned(){
+        int quantity1 = 3;
+        int itemIdentifier = 123456;
+
+        ItemDTO itemDTO = inventorySystem.getItemDetails(itemIdentifier);
+        saleDetails.addItem(itemDTO, quantity1);
+
+        int quantity2 = 2;
+
+        itemDTO = inventorySystem.getItemDetails(itemIdentifier);
+        saleDetails.addItem(itemDTO, quantity2);
+
+        int expectedQuantityOfItemsInSale = quantity1 + quantity2;
+
+        assertEquals(expectedQuantityOfItemsInSale, saleDetails.getTotalItemQuantityInSale(), "Item quantity of already scanned item is not added to total quantity variable. ");
+
+    }
+
+    @Test
+    void testAddItemQuantityToQuantityListAlreadyScanned(){
+        int quantity1 = 3;
+        int itemIdentifier = 123456;
+
+        ItemDTO itemDTO = inventorySystem.getItemDetails(itemIdentifier);
+        saleDetails.addItem(itemDTO, quantity1);
+
+        int quantity2 = 2;
+
+        itemDTO = inventorySystem.getItemDetails(itemIdentifier);
+        saleDetails.addItem(itemDTO, quantity2);
+
+        int expectedQuantityOfItemsInSale = quantity1 + quantity2;
+
+        assertEquals(expectedQuantityOfItemsInSale, saleDetails.getItemQuantityListInSale().get(0), "Item quantity of already scanned item is not added to quantity list. ");
+
+    }
+
+    @Test
     void testAddItemCalculateTotalPrice() {
         int quantity = 3;
         int itemIdentifier = 123456;
