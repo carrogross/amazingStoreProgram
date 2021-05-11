@@ -37,12 +37,12 @@ public class View {
         System.out.println("A new sale har been initialized. \n");
     }
 
-    private Sale scanItem(int quantity1, int itemIdentifier1) {
-        Sale saleDetails = controller.scanItem(quantity1, itemIdentifier1);
+    private Sale scanItem(int quantity, int itemIdentifier) {
+        Sale saleDetails = controller.scanItem(quantity, itemIdentifier);
         ItemDTO latestScannedItem = controller.getLatestScannedItemDTO();
         System.out.println("Latest scanned item: " + latestScannedItem.getItemName() + " - " + latestScannedItem.getItemDescription() + ", Price: "
-                + latestScannedItem.getItemPrice() + " SEK" + ", Quantity: " + quantity1 + ", Total price: "
-                + latestScannedItem.getItemPrice() * quantity1 + " SEK \nRunning total incl VAT: " + saleDetails.getTotalPriceInclVat() + " SEK \n");
+                + latestScannedItem.getItemPrice() + " SEK" + ", Quantity: " + quantity + ", Total price: "
+                + latestScannedItem.getItemPrice() * quantity + " SEK \nRunning total incl VAT: " + saleDetails.getTotalPriceInclVat() + " SEK \n");
         return saleDetails;
     }
 
