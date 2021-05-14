@@ -4,6 +4,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import se.kth.iv1350.processSale.controller.Controller;
+import se.kth.iv1350.processSale.integration.InvalidIdentifierException;
 import se.kth.iv1350.processSale.integration.InventorySystem;
 import se.kth.iv1350.processSale.integration.ItemDTO;
 import se.kth.iv1350.processSale.integration.SystemStartup;
@@ -39,7 +40,7 @@ class SaleTest {
     }
 
     @Test
-    void testAddItemAddsItemQuantityToSale() {
+    void testAddItemAddsItemQuantityToSale() throws InvalidIdentifierException {
         int quantity = 3;
         int itemIdentifier = 123456;
 
@@ -49,7 +50,7 @@ class SaleTest {
     }
 
     @Test
-    void testAddItemAddsCorrectItem() {
+    void testAddItemAddsCorrectItem() throws InvalidIdentifierException{
         int quantity = 3;
         int itemIdentifier = 123456;
 
@@ -61,7 +62,7 @@ class SaleTest {
     }
 
     @Test
-    void testAddItemAlreadyScanned(){
+    void testAddItemAlreadyScanned()throws InvalidIdentifierException{
         int quantity1 = 3;
         int itemIdentifier = 123456;
 
@@ -80,7 +81,7 @@ class SaleTest {
     }
 
     @Test
-    void testAddItemQuantityToTotalQuantityAlreadyScanned(){
+    void testAddItemQuantityToTotalQuantityAlreadyScanned()throws InvalidIdentifierException{
         int quantity1 = 3;
         int itemIdentifier = 123456;
 
@@ -99,7 +100,7 @@ class SaleTest {
     }
 
     @Test
-    void testAddItemQuantityToQuantityListAlreadyScanned(){
+    void testAddItemQuantityToQuantityListAlreadyScanned()throws InvalidIdentifierException{
         int quantity1 = 3;
         int itemIdentifier = 123456;
 
@@ -118,7 +119,7 @@ class SaleTest {
     }
 
     @Test
-    void testAddItemCalculateTotalPrice() {
+    void testAddItemCalculateTotalPrice() throws InvalidIdentifierException{
         int quantity = 3;
         int itemIdentifier = 123456;
 
@@ -130,7 +131,7 @@ class SaleTest {
     }
 
     @Test
-    void testAddItemCalculateTotalVatPrice() {
+    void testAddItemCalculateTotalVatPrice()throws InvalidIdentifierException {
         int quantity = 3;
         int itemIdentifier = 123456;
 
@@ -142,7 +143,7 @@ class SaleTest {
     }
 
     @Test
-    void testAddItemCalculateTotalPriceInclVat() {
+    void testAddItemCalculateTotalPriceInclVat() throws InvalidIdentifierException{
         int quantity = 3;
         int itemIdentifier = 123456;
 

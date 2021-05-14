@@ -41,30 +41,36 @@ public class Controller {
     }
 
     /**
-     *
-     * @param quantity
-     * @param itemIdentifier
-     * @return
+     * Gets item details regarding the item of the <code>itemIdentifier</code> from inventory system, adds the scanned item to the sale.
+     * If a quantity 0 is entered this is changed to 1. Returns the updated sale object with the latest scanned item added to it.
+     * @param itemIdentifier The number code identifying the item scanned.
+     * @return The updated sale object with the latest scanned item added to it.
      */
-    public Sale scanItem(int quantity, int itemIdentifier){
-        if(quantity == 0)
-            quantity = 1;
+    public Sale scanItem(int itemIdentifier) {
+        int quantity = 1;
+        try {
+            latestScannedItemDTO = inventorySystem.getItemDetails(itemIdentifier);
+        } catch(InvalidIdentifierException invalidIdentifierException){
+            System.out.println("The entered identifier is invalid!\n");
+            return saleDetails;
+        }
 
-        latestScannedItemDTO = inventorySystem.getItemDetails(itemIdentifier);
         saleDetails.addItem(latestScannedItemDTO, quantity);
         return saleDetails;
     }
 
     /**
-     *
-     * @return
+     * Returns the total price of the sale, including the total VAT-price.
+     * @return The total price of the sale, including the total VAT-price.
      */
     public double endSale(){
         return saleDetails.getTotalPriceInclVat();
     }
 
     /**
-     *
+     * Updates the amount of cash in the register with the total price for the sale, incl. VAT. Sends a created
+     * <code>ReceiptDTO</code> to the printer to print, logs the sale in the sales log and returns the
+     * value of cash that should be given to the customer as change.
      * @param amountPaid The value of cash that is entered as payment for the purchase.
      * @return The value of cash that should be given to customer as change.
      */
@@ -79,7 +85,7 @@ public class Controller {
     }
 
     /**
-     *
+     * Not a part of this exercise, yet...
      * @param customerPersonalNumber
      * @return
      */

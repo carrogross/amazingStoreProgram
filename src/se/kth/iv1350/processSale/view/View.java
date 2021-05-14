@@ -24,9 +24,9 @@ public class View {
     public void runExampleSession() {
 
         initializeNewSale();
-        scanItem(1, 123456);
-        scanItem(2, 456789);
-        Sale saleDetails = scanItem(3, 123456);
+        scanItem(123456);
+        scanItem(678678);
+        Sale saleDetails = scanItem(234567);
         endSale(saleDetails);
         //requestDiscount(customerPersonalNumber);
         calculateChange(100);
@@ -37,12 +37,12 @@ public class View {
         System.out.println("A new sale har been initialized. \n");
     }
 
-    private Sale scanItem(int quantity, int itemIdentifier) {
-        Sale saleDetails = controller.scanItem(quantity, itemIdentifier);
+    private Sale scanItem(int itemIdentifier) {
+        Sale saleDetails = controller.scanItem(itemIdentifier);
         ItemDTO latestScannedItem = controller.getLatestScannedItemDTO();
         System.out.println("Latest scanned item: " + latestScannedItem.getItemName() + " - " + latestScannedItem.getItemDescription() + ", Price: "
-                + latestScannedItem.getItemPrice() + " SEK" + ", Quantity: " + quantity + ", Total price: "
-                + latestScannedItem.getItemPrice() * quantity + " SEK \nRunning total incl VAT: " + saleDetails.getTotalPriceInclVat() + " SEK \n");
+                + latestScannedItem.getItemPrice() + " SEK" + ", Quantity: 1, Total price: "
+                + latestScannedItem.getItemPrice() * 1 + " SEK \nRunning total incl VAT: " + saleDetails.getTotalPriceInclVat() + " SEK \n");
         return saleDetails;
     }
 
@@ -59,6 +59,6 @@ public class View {
 
     private void endSale(Sale saleDetails) {
         controller.endSale();
-        System.out.println("Total price: " + saleDetails.getTotalPriceInclVat() + " SEK \n");
+        System.out.println("TOTAL PRICE INCL VAT: " + saleDetails.getTotalPriceInclVat() + " SEK \n");
     }
 }

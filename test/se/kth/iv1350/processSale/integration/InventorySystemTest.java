@@ -25,7 +25,7 @@ class InventorySystemTest {
     }
 
     @Test
-    void getItemDetailsCreatesItemDTOCorrectly() {
+    void getItemDetailsCreatesItemDTOCorrectly()throws InvalidIdentifierException {
         int itemIdentifier = 123456;
 
         this.itemDTO = inventorySystem.getItemDetails(itemIdentifier);

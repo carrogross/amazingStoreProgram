@@ -35,18 +35,27 @@ public class InventorySystem {
      * @param itemIdentifier The 6 figured number code on the items bar code.
      * @return The <code>ItemDTO</code> containing all information in the item registry about the item with the specified <code>itemIdentifier</code>.
      */
-    public ItemDTO getItemDetails(int itemIdentifier) {
+    public ItemDTO getItemDetails(int itemIdentifier) throws InvalidIdentifierException {
         return findItem(itemIdentifier);
     }
 
-    private ItemDTO findItem(int itemIdentifier){
+    private ItemDTO findItem(int itemIdentifier) throws InvalidIdentifierException{
+        for (ItemDTO itemDTO : inventoryItemList) {
+            this.itemDTO = itemDTO;
+            if (itemFound(itemIdentifier)) {
+                return this.itemDTO;
+            }
+        }
+        /*
+        SAME AS:
         for(int index = 0; index < inventoryItemList.size(); index++){
             itemDTO = inventoryItemList.get(index);
             if(itemFound(itemIdentifier)){
                 return itemDTO;
             }
         }
-        return itemDTO = null;
+         */
+        throw new InvalidIdentifierException("Invalid identifier entered");
     }
 
     private boolean itemFound(int itemIdentifier){

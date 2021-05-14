@@ -40,13 +40,14 @@ class ControllerTest {
         int quantity = 2;
         int itemIdentifier = 123456;
 
-        saleDetails = controller.scanItem(quantity, itemIdentifier);
+        saleDetails = controller.scanItem(itemIdentifier);
         int expectedQuantity = 1;
         assertEquals(expectedQuantity, saleDetails.getItemListInSale().size(), "Item is not added to Sale object. ");
     }
 
+    /*
     @Test
-    void testScanItemZeroQuantityEntered(){
+    void testScanItemZeroQuantityEntered() throws InvalidIdentifierException{
         controller.initializeSale();
         int quantity = 0;
         int itemIdentifier = 123456;
@@ -56,9 +57,11 @@ class ControllerTest {
         assertEquals(expectedQuantity, saleDetails.getItemListInSale().size(), "Zero quantity not registered as 1. ");
 
     }
+     */
 
+    /*
     @Test
-    void testScanItemAddsItemQuantityToSale() {
+    void testScanItemAddsItemQuantityToSale() throws InvalidIdentifierException{
         controller.initializeSale();
         int quantity = 3;
         int itemIdentifier = 123456;
@@ -66,6 +69,7 @@ class ControllerTest {
         saleDetails = controller.scanItem(quantity, itemIdentifier);
         assertEquals(quantity, saleDetails.getTotalItemQuantityInSale(), "Item quantity is not added to Sale object. ");
     }
+     */
 
     @Test
     void testScanItemAddsCorrectItem() {
@@ -73,7 +77,7 @@ class ControllerTest {
         int quantity = 3;
         int itemIdentifier = 123456;
 
-        saleDetails = controller.scanItem(quantity, itemIdentifier);
+        saleDetails = controller.scanItem(itemIdentifier);
         String expectedItemName = "Gurka";
 
         assertEquals(expectedItemName, saleDetails.getItemListInSale().get(saleDetails.getItemListInSale().size() - 1).getItemName(), "ItemDTO is not correctly added to Sale object. ");
@@ -127,7 +131,7 @@ class ControllerTest {
         controller.initializeSale();
         int quantity = 3;
         int itemIdentifier = 123456;
-        saleDetails = controller.scanItem(quantity, itemIdentifier);
+        saleDetails = controller.scanItem(itemIdentifier);
 
         double totalPriceForSale = 50;
         saleDetails.setTotalPriceForSale(totalPriceForSale);
