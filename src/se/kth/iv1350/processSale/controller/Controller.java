@@ -4,6 +4,11 @@ import se.kth.iv1350.processSale.integration.*;
 import se.kth.iv1350.processSale.model.DiscountRules;
 import se.kth.iv1350.processSale.model.Sale;
 import se.kth.iv1350.processSale.model.SalesLog;
+import se.kth.iv1350.processSale.util.ConsoleLogger;
+import se.kth.iv1350.processSale.util.FileLogger;
+import se.kth.iv1350.processSale.util.Logger;
+
+import java.io.IOException;
 
 /**
  * The class containing the programs only Controller. All calls from view must go
@@ -11,25 +16,29 @@ import se.kth.iv1350.processSale.model.SalesLog;
  */
 public class Controller {
     SalesLog salesLog;
-    DiscountRules discountRules;
+    DiscountRules discountRules ;
     Sale saleDetails;
     SystemStartup systemStartup;
     InventorySystem inventorySystem;
     Register register;
     Printer printer;
     ItemDTO latestScannedItemDTO;
+    Logger logger;
+    ConsoleLogger consoleLogger;
 
     /**
      * The only Controller in the program. All calls from view must go
      * through Controller which distributes to the right class and method.
      */
-    public Controller(){
+    public Controller(Logger logger) throws IOException {
         this.systemStartup = new SystemStartup();
         this.inventorySystem = systemStartup.getInventorySystem();
         this.printer = systemStartup.getPrinter();
         this.register = systemStartup.getRegister();
         this.salesLog = new SalesLog(systemStartup);
         this.discountRules = new DiscountRules();
+        this.logger = logger;
+        consoleLogger = new ConsoleLogger(consoleLogger);
     }
 
     /**
@@ -43,19 +52,19 @@ public class Controller {
     /**
      * Gets item details regarding the item of the <code>itemIdentifier</code> from inventory system, adds the scanned item to the sale.
      * If a quantity 0 is entered this is changed to 1. Returns the updated sale object with the latest scanned item added to it.
+     * For this part of the exercise quantity is fixed to 1, variable is not deleted because of the option to later make it enter another quantity.
+     * @param quantity The number of items with the entered identifier cashier wants to add to the sale.
      * @param itemIdentifier The number code identifying the item scanned.
      * @return The updated sale object with the latest scanned item added to it.
      */
-    public Sale scanItem(int itemIdentifier) {
-        int quantity = 1;
+    public Sale scanItem(int quantity, int itemIdentifier) throws InvalidIdentifierException, OperationFailedException, IOException {
         try {
             latestScannedItemDTO = inventorySystem.getItemDetails(itemIdentifier);
-        } catch(InvalidIdentifierException invalidIdentifierException){
-            System.out.println("The entered identifier is invalid!\n");
-            return saleDetails;
+            saleDetails.addItem(latestScannedItemDTO, quantity);
+        } catch(FailureDBReachException failureDBReachException){
+            logger.log(failureDBReachException.toString());
+            throw new OperationFailedException("Unable to read from database\n", failureDBReachException);
         }
-
-        saleDetails.addItem(latestScannedItemDTO, quantity);
         return saleDetails;
     }
 
@@ -86,8 +95,9 @@ public class Controller {
 
     /**
      * Not a part of this exercise, yet...
-     * @param customerPersonalNumber
-     * @return
+     * @param customerPersonalNumber The personal number identifying the customer, which can determine if the customer is eligible
+     * for a discount or not.
+     * @return The total price for the sale, after discount, incl VAT.
      */
     public double requestDiscount(long customerPersonalNumber) {
         return discountRules.calculateDiscount(customerPersonalNumber, saleDetails);

@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Test;
 import se.kth.iv1350.processSale.controller.Controller;
 import se.kth.iv1350.processSale.integration.ReceiptDTO;
 import se.kth.iv1350.processSale.integration.SystemStartup;
+import se.kth.iv1350.processSale.util.FileLogger;
+
+import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,8 +19,8 @@ class SalesLogTest {
     SalesLog salesLog;
 
     @BeforeEach
-    void setUp() {
-        this.controller = new Controller();
+    void setUp() throws IOException {
+        this.controller = new Controller(new FileLogger());
         this.systemStartup = new SystemStartup();
         this.salesLog = new SalesLog(systemStartup);
 

@@ -19,6 +19,8 @@ public class InventorySystem {
         inventoryItemList.add(new ItemDTO(7, 123456, "Gurka", 12, "Ekologisk"));
         inventoryItemList.add(new ItemDTO(10, 345678, "Glass", 25, "Jordgubb"));
         inventoryItemList.add(new ItemDTO(3, 456789, "Popcorn", 12, "Smörsmak"));
+        inventoryItemList.add(new ItemDTO(0, 666666, "DB failure", 12, "Always generates DB failure"));
+
     }
 
     /**
@@ -35,7 +37,9 @@ public class InventorySystem {
      * @param itemIdentifier The 6 figured number code on the items bar code.
      * @return The <code>ItemDTO</code> containing all information in the item registry about the item with the specified <code>itemIdentifier</code>.
      */
-    public ItemDTO getItemDetails(int itemIdentifier) throws InvalidIdentifierException {
+    public ItemDTO getItemDetails(int itemIdentifier) throws InvalidIdentifierException, FailureDBReachException {
+        if(itemIdentifier == 666666)
+            throw new FailureDBReachException("error code: 10104040333");
         return findItem(itemIdentifier);
     }
 
@@ -46,16 +50,8 @@ public class InventorySystem {
                 return this.itemDTO;
             }
         }
-        /*
-        SAME AS:
-        for(int index = 0; index < inventoryItemList.size(); index++){
-            itemDTO = inventoryItemList.get(index);
-            if(itemFound(itemIdentifier)){
-                return itemDTO;
-            }
-        }
-         */
-        throw new InvalidIdentifierException("Invalid identifier entered");
+
+        throw new InvalidIdentifierException("Invalid identifier entered" + itemIdentifier);
     }
 
     private boolean itemFound(int itemIdentifier){

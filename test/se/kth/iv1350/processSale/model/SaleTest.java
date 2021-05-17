@@ -4,10 +4,10 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import se.kth.iv1350.processSale.controller.Controller;
-import se.kth.iv1350.processSale.integration.InvalidIdentifierException;
-import se.kth.iv1350.processSale.integration.InventorySystem;
-import se.kth.iv1350.processSale.integration.ItemDTO;
-import se.kth.iv1350.processSale.integration.SystemStartup;
+import se.kth.iv1350.processSale.integration.*;
+import se.kth.iv1350.processSale.util.FileLogger;
+
+import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,8 +18,8 @@ class SaleTest {
     InventorySystem inventorySystem;
 
     @BeforeEach
-    void setUp() {
-        this.controller = new Controller();
+    void setUp() throws IOException {
+        this.controller = new Controller(new FileLogger());
         this.saleDetails = new Sale();
         this.systemStartup = new SystemStartup();
         this.inventorySystem = systemStartup.getInventorySystem();
@@ -40,7 +40,7 @@ class SaleTest {
     }
 
     @Test
-    void testAddItemAddsItemQuantityToSale() throws InvalidIdentifierException {
+    void testAddItemAddsItemQuantityToSale() throws InvalidIdentifierException, FailureDBReachException {
         int quantity = 3;
         int itemIdentifier = 123456;
 
@@ -50,7 +50,7 @@ class SaleTest {
     }
 
     @Test
-    void testAddItemAddsCorrectItem() throws InvalidIdentifierException{
+    void testAddItemAddsCorrectItem() throws InvalidIdentifierException, FailureDBReachException {
         int quantity = 3;
         int itemIdentifier = 123456;
 
@@ -62,7 +62,7 @@ class SaleTest {
     }
 
     @Test
-    void testAddItemAlreadyScanned()throws InvalidIdentifierException{
+    void testAddItemAlreadyScanned() throws InvalidIdentifierException, FailureDBReachException {
         int quantity1 = 3;
         int itemIdentifier = 123456;
 
@@ -81,7 +81,7 @@ class SaleTest {
     }
 
     @Test
-    void testAddItemQuantityToTotalQuantityAlreadyScanned()throws InvalidIdentifierException{
+    void testAddItemQuantityToTotalQuantityAlreadyScanned() throws InvalidIdentifierException, FailureDBReachException {
         int quantity1 = 3;
         int itemIdentifier = 123456;
 
@@ -100,7 +100,7 @@ class SaleTest {
     }
 
     @Test
-    void testAddItemQuantityToQuantityListAlreadyScanned()throws InvalidIdentifierException{
+    void testAddItemQuantityToQuantityListAlreadyScanned() throws InvalidIdentifierException, FailureDBReachException {
         int quantity1 = 3;
         int itemIdentifier = 123456;
 
@@ -119,7 +119,7 @@ class SaleTest {
     }
 
     @Test
-    void testAddItemCalculateTotalPrice() throws InvalidIdentifierException{
+    void testAddItemCalculateTotalPrice() throws InvalidIdentifierException, FailureDBReachException {
         int quantity = 3;
         int itemIdentifier = 123456;
 
@@ -131,7 +131,7 @@ class SaleTest {
     }
 
     @Test
-    void testAddItemCalculateTotalVatPrice()throws InvalidIdentifierException {
+    void testAddItemCalculateTotalVatPrice() throws InvalidIdentifierException, FailureDBReachException {
         int quantity = 3;
         int itemIdentifier = 123456;
 
@@ -143,7 +143,7 @@ class SaleTest {
     }
 
     @Test
-    void testAddItemCalculateTotalPriceInclVat() throws InvalidIdentifierException{
+    void testAddItemCalculateTotalPriceInclVat() throws InvalidIdentifierException, FailureDBReachException {
         int quantity = 3;
         int itemIdentifier = 123456;
 

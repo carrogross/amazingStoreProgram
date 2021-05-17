@@ -25,7 +25,7 @@ class InventorySystemTest {
     }
 
     @Test
-    void getItemDetailsCreatesItemDTOCorrectly()throws InvalidIdentifierException {
+    void getItemDetailsCreatesItemDTOCorrectly() throws InvalidIdentifierException, FailureDBReachException {
         int itemIdentifier = 123456;
 
         this.itemDTO = inventorySystem.getItemDetails(itemIdentifier);

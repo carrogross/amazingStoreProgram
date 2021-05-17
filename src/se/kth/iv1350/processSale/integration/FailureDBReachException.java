@@ -3,12 +3,12 @@ package se.kth.iv1350.processSale.integration;
 /**
  *
  */
-public class InvalidIdentifierException extends Exception {
+public class FailureDBReachException extends Exception {
     /**
      *
      * @param message
      */
-    public InvalidIdentifierException(String message) {
+    public FailureDBReachException(String message) {
         super(message);
     }
 }

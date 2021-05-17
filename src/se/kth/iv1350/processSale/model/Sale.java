@@ -9,8 +9,8 @@ import java.util.List;
  * Contains information about the current sale and each entered item.
  */
 public class Sale {
-    ArrayList<ItemDTO> itemListInSale = new ArrayList<>();
-    List<Integer> itemQuantityListInSale = new ArrayList<>();
+    ArrayList<ItemDTO> itemListInSale;
+    List<Integer> itemQuantityListInSale;
     double totalPriceForSale;
     double totalVatPrice;
     int totalItemQuantityInSale;
@@ -19,6 +19,8 @@ public class Sale {
      * Creates a new <code>Sale</code> to enter information about the sale in.
      */
     public Sale(){
+        this.itemQuantityListInSale = new ArrayList<>();
+        this.itemListInSale = new ArrayList<>();
         totalPriceForSale = 0;
         totalVatPrice = 0;
         totalItemQuantityInSale = 0;
@@ -58,7 +60,8 @@ public class Sale {
     }
 
     private void updateQuantityList(int quantity, int i) {
-        int newQuantity = (itemQuantityListInSale.get(i) + quantity);
+        int previousQuantity = itemQuantityListInSale.get(i);
+        int newQuantity = previousQuantity + quantity;
         itemQuantityListInSale.set(i, newQuantity);
     }
 

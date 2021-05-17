@@ -1,9 +1,14 @@
 package se.kth.iv1350.processSale.controller;
 
 import org.junit.jupiter.api.*;
+import se.kth.iv1350.processSale.integration.InvalidIdentifierException;
+import se.kth.iv1350.processSale.integration.OperationFailedException;
 import se.kth.iv1350.processSale.integration.Register;
 import se.kth.iv1350.processSale.integration.SystemStartup;
 import se.kth.iv1350.processSale.model.Sale;
+import se.kth.iv1350.processSale.util.FileLogger;
+
+import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,8 +19,8 @@ class ControllerTest {
 
 
     @BeforeEach
-    void setUp() {
-        this.controller = new Controller();
+    void setUp() throws IOException {
+        this.controller = new Controller(new FileLogger());
     }
 
     @AfterEach
@@ -35,12 +40,12 @@ class ControllerTest {
     }
 
     @Test
-    void testScanItemAddsNewItemToSale(){
+    void testScanItemAddsNewItemToSale() throws InvalidIdentifierException, OperationFailedException, IOException {
         controller.initializeSale();
         int quantity = 2;
         int itemIdentifier = 123456;
 
-        saleDetails = controller.scanItem(itemIdentifier);
+        saleDetails = controller.scanItem(quantity, itemIdentifier);
         int expectedQuantity = 1;
         assertEquals(expectedQuantity, saleDetails.getItemListInSale().size(), "Item is not added to Sale object. ");
     }
@@ -72,12 +77,12 @@ class ControllerTest {
      */
 
     @Test
-    void testScanItemAddsCorrectItem() {
+    void testScanItemAddsCorrectItem() throws InvalidIdentifierException, OperationFailedException, IOException {
         controller.initializeSale();
         int quantity = 3;
         int itemIdentifier = 123456;
 
-        saleDetails = controller.scanItem(itemIdentifier);
+        saleDetails = controller.scanItem(quantity, itemIdentifier);
         String expectedItemName = "Gurka";
 
         assertEquals(expectedItemName, saleDetails.getItemListInSale().get(saleDetails.getItemListInSale().size() - 1).getItemName(), "ItemDTO is not correctly added to Sale object. ");
@@ -127,11 +132,11 @@ class ControllerTest {
     }
 
     @Test
-    void testCalculateChangeReturnsChange(){
+    void testCalculateChangeReturnsChange() throws InvalidIdentifierException, OperationFailedException, IOException {
         controller.initializeSale();
         int quantity = 3;
         int itemIdentifier = 123456;
-        saleDetails = controller.scanItem(itemIdentifier);
+        saleDetails = controller.scanItem(quantity, itemIdentifier);
 
         double totalPriceForSale = 50;
         saleDetails.setTotalPriceForSale(totalPriceForSale);
