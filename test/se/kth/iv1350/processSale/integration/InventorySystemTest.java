@@ -34,5 +34,27 @@ class InventorySystemTest {
         assertEquals(expectedItemName, inventorySystem.itemDTO.getItemName(), "ItemDTO is not created correctly. ");
 
     }
+/*
+    @Test
+    void getItemDetailsThrowsInvalidIdentifierException() throws InvalidIdentifierException, FailureDBReachException {
+        int itemIdentifier = 111111;
+
+        this.itemDTO = inventorySystem.getItemDetails(itemIdentifier);
+        assertThrows(InvalidIdentifierException );
+
+    }
+
+    @Test
+    void getItemDetailsThrowsFailureDBReachException() throws InvalidIdentifierException, FailureDBReachException {
+        int itemIdentifier = 666666;
+        try {
+            this.itemDTO = inventorySystem.getItemDetails(itemIdentifier);
+        } catch(FailureDBReachException e){
+
+        }
+        fail("FailureDBReachException was not thrown. ");
+    }
+
+ */
 
 }

@@ -52,7 +52,7 @@ public class ReceiptDTO {
         return storeName;
     }
 
-    Sale getSaleDetails() {
+    public Sale getSaleDetails() {
         return saleDetails;
     }
 

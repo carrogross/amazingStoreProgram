@@ -1,14 +1,14 @@
 package se.kth.iv1350.processSale.controller;
 
 import se.kth.iv1350.processSale.integration.*;
-import se.kth.iv1350.processSale.model.DiscountRules;
-import se.kth.iv1350.processSale.model.Sale;
-import se.kth.iv1350.processSale.model.SalesLog;
+import se.kth.iv1350.processSale.model.*;
 import se.kth.iv1350.processSale.util.ConsoleLogger;
-import se.kth.iv1350.processSale.util.FileLogger;
 import se.kth.iv1350.processSale.util.Logger;
+import se.kth.iv1350.processSale.view.TotalRevenueView;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The class containing the programs only Controller. All calls from view must go
@@ -25,6 +25,7 @@ public class Controller {
     ItemDTO latestScannedItemDTO;
     Logger logger;
     ConsoleLogger consoleLogger;
+    private List<SaleObserver> saleObservers = new ArrayList<>();
 
     /**
      * The only Controller in the program. All calls from view must go
@@ -36,9 +37,10 @@ public class Controller {
         this.printer = systemStartup.getPrinter();
         this.register = systemStartup.getRegister();
         this.salesLog = new SalesLog(systemStartup);
-        this.discountRules = new DiscountRules();
+        this.discountRules = new DiscountRules(new DiscountFirstCase(), new DiscountSecondCase());
         this.logger = logger;
         consoleLogger = new ConsoleLogger(consoleLogger);
+        salesLog.addSaleObserver(new TotalRevenueView());
     }
 
     /**
@@ -109,5 +111,13 @@ public class Controller {
      */
     public ItemDTO getLatestScannedItemDTO() {
         return latestScannedItemDTO;
+    }
+
+    /**
+     * Adds the specified view to a list of observers that should be notified when a sale is completed.
+     * @param totalRevenueView The view that should be added to the list.
+     */
+    public void addSaleObserver(TotalRevenueView totalRevenueView){
+        saleObservers.add(totalRevenueView);
     }
 }

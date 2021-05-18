@@ -1,0 +1,1 @@
+2021-05-18T22:25:02.044876: se.kth.iv1350.processSale.integration.FailureDBReachException: error code: 10104040333
