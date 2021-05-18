@@ -9,8 +9,8 @@ public class TotalRevenueView implements SaleObserver {
     double totalRevenue;
 
     /**
-     *
-     * @param totalRev
+     * Prints the total revenue to the console.
+     * @param totalRev The total revenue that should be printed.
      */
     @Override
     public void saleRevenue(double totalRev) {
@@ -21,8 +21,8 @@ public class TotalRevenueView implements SaleObserver {
     }
 
     /**
-     *
-     * @param totalPrice
+     * Calculates the total revenue of sales completed since the program was started.
+     * @param totalPrice The total price, incl VAT, for the current sale.
      */
     @Override
     public void calculateTotalRev(double totalPrice) {
