@@ -8,6 +8,10 @@ public class SystemStartup {
     Printer printer;
     InventorySystem inventorySystem;
     AccountingSystem accountingSystem;
+    Composite composite;
+    UpdateExternalSystems UIS;
+    UpdateExternalSystems UAS;
+
 
     /**
      * Creates new objects of each external system: register, printer, inventory system, accounting system and
@@ -18,6 +22,9 @@ public class SystemStartup {
         this.printer = new Printer();
         this.inventorySystem = new InventorySystem();
         this.accountingSystem = new AccountingSystem();
+        this.composite = new Composite();
+        this.UIS = new UpdateInventorySystem(this);
+        this.UAS = new UpdateAccountingSystem(this);
     }
 
     /**
@@ -51,4 +58,14 @@ public class SystemStartup {
     public AccountingSystem getAccountingSystem(){
         return accountingSystem;
     }
+
+    /**
+     * Gets the <code>UpdateInventorySystem</code> started by <code>systemStartup</code>.
+     * @return The object holding a <code>UpdateInventorySystem</code> started by <code>systemStartup</code>.
+     */
+    public UpdateExternalSystems getUIS(){
+        return UIS;
+    }
+
 }
+

@@ -1,9 +1,6 @@
 package se.kth.iv1350.processSale.model;
 
-import se.kth.iv1350.processSale.integration.AccountingSystem;
-import se.kth.iv1350.processSale.integration.InventorySystem;
-import se.kth.iv1350.processSale.integration.ReceiptDTO;
-import se.kth.iv1350.processSale.integration.SystemStartup;
+import se.kth.iv1350.processSale.integration.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,6 +16,8 @@ public class SalesLog {
     AccountingSystem accountingSystem;
     TotalRevenueFileOutput totalRevenueFileOutput;
     private List<SaleObserver> saleObservers= new ArrayList<>();
+    private UpdateExternalSystems updateExternalSystems;
+    ExternalSystemsFactory externalSystemsFactory;
 
     /**
      * Creates the sales log that each <code>ReceiptDTO</code> is logged in.
@@ -28,6 +27,7 @@ public class SalesLog {
         this.inventorySystem = systemStartup.getInventorySystem();
         this.accountingSystem = systemStartup.getAccountingSystem();
         this.totalRevenueFileOutput = new TotalRevenueFileOutput();
+        this.updateExternalSystems = systemStartup.getUIS();
     }
 
     /**
@@ -39,8 +39,10 @@ public class SalesLog {
         salesLog.add(receiptDTO);
         notifyObservers(receiptDTO);
         totalRevenueFileOutput.saleRevenue(receiptDTO.getSaleDetails().getTotalPriceInclVat());
-        inventorySystem.updateInventorySystem(receiptDTO);
-        accountingSystem.updateAccountingSystem(receiptDTO);
+        this.externalSystemsFactory = new ExternalSystemsFactory();
+        externalSystemsFactory.getComposite();
+        updateExternalSystems.updateSystems(receiptDTO);
+
     }
 
     private void notifyObservers(ReceiptDTO receiptDTO) {

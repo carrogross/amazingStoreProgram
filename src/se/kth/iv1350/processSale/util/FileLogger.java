@@ -38,7 +38,7 @@ public class FileLogger implements Logger{
     @Override
     public void log(String message) {
         printWriter.println(currentTime() + ": " + message);
-        printWriter.close();
+        printWriter.flush();
     }
 
     private LocalDateTime currentTime(){
