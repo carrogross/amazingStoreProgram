@@ -5,7 +5,6 @@ import se.kth.iv1350.processSale.model.*;
 import se.kth.iv1350.processSale.util.ConsoleLogger;
 import se.kth.iv1350.processSale.util.Logger;
 import se.kth.iv1350.processSale.view.TotalRevenueView;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +57,8 @@ public class Controller {
      * @param quantity The number of items with the entered identifier cashier wants to add to the sale.
      * @param itemIdentifier The number code identifying the item scanned.
      * @return The updated sale object with the latest scanned item added to it.
+     * @throws InvalidIdentifierException Is thrown if an identifier is entered that is not in the item registry.
+     * @throws OperationFailedException Is thrown if a FailureDBReachException is caught because the database is not reached.
      */
     public Sale scanItem(int quantity, int itemIdentifier) throws InvalidIdentifierException, OperationFailedException, IOException {
         try {

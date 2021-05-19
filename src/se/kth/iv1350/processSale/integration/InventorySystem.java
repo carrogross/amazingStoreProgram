@@ -36,6 +36,8 @@ public class InventorySystem {
      * Collects all information about the item represented by <code>itemIdentifier</code> and puts these together in an <code>ItemDTO</code>.
      * @param itemIdentifier The 6 figured number code on the items bar code.
      * @return The <code>ItemDTO</code> containing all information in the item registry about the item with the specified <code>itemIdentifier</code>.
+     * @throws InvalidIdentifierException Is thrown if an identifier is entered that is not in the item registry.
+     * @throws FailureDBReachException Is thrown if the database is not reached.
      */
     public ItemDTO getItemDetails(int itemIdentifier) throws InvalidIdentifierException, FailureDBReachException {
         if(itemIdentifier == 666666)
@@ -57,5 +59,4 @@ public class InventorySystem {
     private boolean itemFound(int itemIdentifier){
         return itemDTO.getItemIdentifier() == itemIdentifier;
     }
-
 }
