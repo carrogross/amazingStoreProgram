@@ -34,27 +34,25 @@ class InventorySystemTest {
         assertEquals(expectedItemName, inventorySystem.itemDTO.getItemName(), "ItemDTO is not created correctly. ");
 
     }
-/*
+
     @Test
-    void getItemDetailsThrowsInvalidIdentifierException() throws InvalidIdentifierException, FailureDBReachException {
+    void getItemDetailsThrowsInvalidIdentifierException() {
         int itemIdentifier = 111111;
+        InvalidIdentifierException invalidIdentifierException = assertThrows(
+                InvalidIdentifierException.class, () -> inventorySystem.getItemDetails(itemIdentifier), "Did not throw expected exception"
+        );
 
-        this.itemDTO = inventorySystem.getItemDetails(itemIdentifier);
-        assertThrows(InvalidIdentifierException );
-
+        assertTrue(invalidIdentifierException.getMessage().contains("Invalid"), "Exception did not contain expected message. ");
     }
 
     @Test
-    void getItemDetailsThrowsFailureDBReachException() throws InvalidIdentifierException, FailureDBReachException {
+    void getItemDetailsThrowsFailureDBReachException() {
         int itemIdentifier = 666666;
-        try {
-            this.itemDTO = inventorySystem.getItemDetails(itemIdentifier);
-        } catch(FailureDBReachException e){
+        FailureDBReachException failureDBReachException = assertThrows(
+                FailureDBReachException.class, () -> inventorySystem.getItemDetails(itemIdentifier), "Did not throw expected exception"
+        );
 
-        }
-        fail("FailureDBReachException was not thrown. ");
+        assertTrue(failureDBReachException.getMessage().contains("error"), "Exception did not contain expected message. ");
     }
-
- */
 
 }

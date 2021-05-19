@@ -50,9 +50,9 @@ class ControllerTest {
         assertEquals(expectedQuantity, saleDetails.getItemListInSale().size(), "Item is not added to Sale object. ");
     }
 
-    /*
+
     @Test
-    void testScanItemZeroQuantityEntered() throws InvalidIdentifierException{
+    void testScanItemZeroQuantityEntered() throws InvalidIdentifierException, IOException, OperationFailedException {
         controller.initializeSale();
         int quantity = 0;
         int itemIdentifier = 123456;
@@ -62,11 +62,9 @@ class ControllerTest {
         assertEquals(expectedQuantity, saleDetails.getItemListInSale().size(), "Zero quantity not registered as 1. ");
 
     }
-     */
 
-    /*
     @Test
-    void testScanItemAddsItemQuantityToSale() throws InvalidIdentifierException{
+    void testScanItemAddsItemQuantityToSale() throws InvalidIdentifierException, IOException, OperationFailedException {
         controller.initializeSale();
         int quantity = 3;
         int itemIdentifier = 123456;
@@ -74,7 +72,6 @@ class ControllerTest {
         saleDetails = controller.scanItem(quantity, itemIdentifier);
         assertEquals(quantity, saleDetails.getTotalItemQuantityInSale(), "Item quantity is not added to Sale object. ");
     }
-     */
 
     @Test
     void testScanItemAddsCorrectItem() throws InvalidIdentifierException, OperationFailedException, IOException {
@@ -150,5 +147,17 @@ class ControllerTest {
 
     @Test
     void requestDiscount() {
+    }
+
+    @Test
+    void testScanItemThrowsOperationFailedException(){
+        controller.initializeSale();
+        int quantity = 3;
+        int itemIdentifier = 666666;
+        OperationFailedException operationFailedException = assertThrows(
+                OperationFailedException.class, () -> controller.scanItem(quantity, itemIdentifier), "Did not throw expected exception. "
+        );
+
+        assertTrue(operationFailedException.getMessage().contains("Unable"), "Exception did not contain the expected message.");
     }
 }

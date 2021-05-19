@@ -31,12 +31,12 @@ public class View {
 
         initializeNewSale();
         scanItem(3, 123456);
-        scanItem(2, 111111);
+        scanItem(2, 111111); //identifier that is not in the item registry
         scanItem(2, 123456);
-        scanItem(0, 666666);
+        scanItem(0, 666666); //identifier hard coded to generate DB failure
         scanItem(0, 234567);
         endSale(saleDetails);
-        //requestDiscount(customerPersonalNumber);
+        requestDiscount(2L); //customer ID-number hard coded to be eligible for discount
         calculateChange(100);
     }
 
