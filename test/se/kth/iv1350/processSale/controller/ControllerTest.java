@@ -17,7 +17,6 @@ class ControllerTest {
     private Controller controller;
     private Sale saleDetails;
 
-
     @BeforeEach
     void setUp() throws IOException {
         this.controller = new Controller(new FileLogger());
@@ -110,7 +109,6 @@ class ControllerTest {
         int expectedLoggedSales = 1;
         int amountLoggedSales = controller.salesLog.getSalesLog().size();
         assertEquals(expectedLoggedSales, amountLoggedSales, "The sale is not logged correctly. ");
-
     }
 
     @Test

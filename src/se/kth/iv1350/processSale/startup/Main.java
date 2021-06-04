@@ -14,6 +14,7 @@ public class Main {
      * @param args Array of command line arguments .
      */
     public static void main(String[] args) throws IOException {
+        System.out.println("The program has been started. ");
         View view = new View();
         view.runExampleSession();
         view.runExampleSession();

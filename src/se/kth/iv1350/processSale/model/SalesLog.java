@@ -2,7 +2,6 @@ package se.kth.iv1350.processSale.model;
 
 import se.kth.iv1350.processSale.integration.*;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,19 +13,18 @@ public class SalesLog {
     ArrayList<ReceiptDTO> salesLog;
     InventorySystem inventorySystem;
     AccountingSystem accountingSystem;
-    TotalRevenueFileOutput totalRevenueFileOutput;
-    private List<SaleObserver> saleObservers= new ArrayList<>();
+    private List<SaleObserver> saleObservers = new ArrayList<>();
     private UpdateExternalSystems updateExternalSystems;
     ExternalSystemsFactory externalSystemsFactory;
 
     /**
      * Creates the sales log that each <code>ReceiptDTO</code> is logged in.
      */
-    public SalesLog(SystemStartup systemStartup) throws IOException {
+    public SalesLog(SystemStartup systemStartup) {
         salesLog = new ArrayList<>();
         this.inventorySystem = systemStartup.getInventorySystem();
         this.accountingSystem = systemStartup.getAccountingSystem();
-        this.totalRevenueFileOutput = new TotalRevenueFileOutput();
+
         this.updateExternalSystems = systemStartup.getUIS();
     }
 
@@ -38,11 +36,8 @@ public class SalesLog {
     public void logSale(ReceiptDTO receiptDTO){
         salesLog.add(receiptDTO);
         notifyObservers(receiptDTO);
-        totalRevenueFileOutput.saleRevenue(receiptDTO.getSaleDetails().getTotalPriceInclVat());
         this.externalSystemsFactory = new ExternalSystemsFactory();
-        externalSystemsFactory.getComposite();
         updateExternalSystems.updateSystems(receiptDTO);
-
     }
 
     private void notifyObservers(ReceiptDTO receiptDTO) {
