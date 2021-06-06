@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import se.kth.iv1350.processSale.controller.Controller;
 import se.kth.iv1350.processSale.model.Sale;
-import se.kth.iv1350.processSale.model.SalesLog;
 import se.kth.iv1350.processSale.util.FileLogger;
 
 import java.io.ByteArrayOutputStream;

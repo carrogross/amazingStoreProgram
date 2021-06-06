@@ -42,7 +42,7 @@ public class View {
 
     private void initializeNewSale() {
         controller.initializeSale();
-        System.out.println("A new sale har been initialized. \n");
+        System.out.println("A new sale has been initialized. \n");
     }
 
     private void scanItem(int quantity, int itemIdentifier) {
