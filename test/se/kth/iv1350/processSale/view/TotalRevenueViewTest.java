@@ -28,7 +28,7 @@ class TotalRevenueViewTest {
 
     @Test
     void saleRevenue(){
-        totalRevenueView.saleRevenue(100);
+        totalRevenueView.showTotalIncome(100);
         String printOut = this.printBuffer.toString();
         String expected = "revenue";
         assertTrue(printOut.contains(expected),"Current revenue not printed corrected. ");

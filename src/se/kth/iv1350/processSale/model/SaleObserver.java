@@ -5,6 +5,5 @@ package se.kth.iv1350.processSale.model;
  */
 public interface SaleObserver {
 
-    void saleRevenue(double totalRev);
-    void calculateTotalRev(double totalPrice);
+    void saleCompleted(double totalPriceOfCurrentSale);
 }
