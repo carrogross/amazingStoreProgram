@@ -1,2 +1,2 @@
-2021-06-06T09:00:24.110594: se.kth.iv1350.processSale.integration.FailureDBReachException: error code: 10104040333
-2021-06-06T09:00:24.164022: se.kth.iv1350.processSale.integration.FailureDBReachException: error code: 10104040333
+2021-06-08T18:46:58.301738: se.kth.iv1350.processSale.integration.FailureDBReachException: error code: 10104040333
+2021-06-08T18:46:58.384778: se.kth.iv1350.processSale.integration.FailureDBReachException: error code: 10104040333

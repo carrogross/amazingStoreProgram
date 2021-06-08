@@ -1,6 +1,5 @@
 package se.kth.iv1350.processSale.view;
 
-
 /**
  * Shows the total income of all sales completed since program started on the user interface.
  */
@@ -16,6 +15,5 @@ public class TotalRevenueView extends TotalRevenueDisplay {
         System.out.println("****************************************");
         System.out.println("*         Current revenue: " + totalRevenue + "       *");
         System.out.println("****************************************");
-
     }
 }
